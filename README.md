@@ -15,13 +15,13 @@ Prefer to use [styled components](http://styled-components.com/) to help keep co
 ```jsx
 import styled from 'styled-components';
 
-const Styles = styled.div`
+const StyledButton = styled.div`
   background-color: red;
   padding: 8px 14px;
 `;
 
 const Button = props => {
-  return <Styled>{props.text}</Styled>;
+  return <StyledButton>{props.text}</StyledButton>;
 };
 ```
 
