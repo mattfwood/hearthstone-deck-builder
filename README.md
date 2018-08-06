@@ -4,6 +4,16 @@
 2.  [State Containers](#state-containers)
 3.  [CSS](#CSS)
 4.  [Testing](#testing)
+5.  [Deploying](#deploying)
+
+# Getting Started
+
+1. Clone Repo
+2. Install NPM dependencies
+```bash
+$ npm install
+```
+3. Use `npm start` to start local server.
 
 ## Style
 
@@ -91,3 +101,10 @@ Settings for VS Code are provided by default. These include helpful format-on-sa
 
 ## Git Hooks
 TODO
+
+## Deploying
+To build the static files for deployment, run `npm run build` and a `build` folder will be created with all the necessary assets.
+
+These static files can be hosted on AWS S3 or a service like [Netlify](https://www.netlify.com/).
+
+Make sure that your server is only accepting requests from domains that you've set up with your build.
