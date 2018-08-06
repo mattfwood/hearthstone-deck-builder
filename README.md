@@ -1,11 +1,14 @@
 # Cratebind React Starter Template
 
-1.
-
-2.  [Styling](#styling)
+1.  [Javascript Style Guide](#style)
+2.  [CSS](#CSS)
 3.  [Testing](#testing)
 
-## Styling
+## Style
+
+For the most part, follow the [AirBNB Javascript Style Guide](https://github.com/airbnb/javascript). We've disabled a few rules in our `.eslintrc` file, but when in doubt defer to their guide.
+
+## CSS
 
 Prefer to use [styled components](http://styled-components.com/) to help keep components self-contained. When creating a custom component that you intend to style, wrap it in a styled component `div`.
 
