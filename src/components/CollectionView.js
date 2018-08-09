@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Button } from 'antd';
 import cards from '../data/cards.json';
 import Filters from './Filters';
+import CardOverlay from './CardOverlay';
 
 const CollectionStyles = styled.div`
   width: 80%;
@@ -46,6 +46,8 @@ class CollectionView extends Component {
       class: null,
       query: null,
     },
+    overlayVisible: false,
+    activeCard: {},
   };
 
   changePage = direction => {
@@ -70,8 +72,16 @@ class CollectionView extends Component {
     }
   };
 
+  viewCard = activeCard => {
+    this.setState({
+      activeCard,
+      overlayVisible: true,
+    });
+  };
+
   render() {
-    const { page, filters } = this.state;
+    const { page, filters, overlayVisible, activeCard } = this.state;
+    // console.log(activeCard);
 
     const filteredCards = cards.filter(card => {
       if (filters.mana !== null) {
@@ -100,11 +110,12 @@ class CollectionView extends Component {
         />
         <CardGrid>
           {visibleCards.map(card => (
-            <div key={card.id} className="card-image">
+            <div key={card.id} role="button" tabIndex={0} className="card-image" onClick={() => this.viewCard(card)}>
               <img src={`https://art.hearthstonejson.com/v1/render/latest/enUS/256x/${card.id}.png`} alt={card.name} />
             </div>
           ))}
         </CardGrid>
+        <CardOverlay card={activeCard} visible={overlayVisible} />
         <Button
           type="primary"
           shape="circle"

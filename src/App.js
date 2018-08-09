@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import cards from './data/cards.json';
 import CollectionView from './components/CollectionView';
 import DeckView from './components/DeckView';
 
