@@ -100,7 +100,7 @@ class CollectionView extends Component {
         />
         <CardGrid>
           {visibleCards.map(card => (
-            <div className="card-image">
+            <div key={card.id} className="card-image">
               <img src={`https://art.hearthstonejson.com/v1/render/latest/enUS/256x/${card.id}.png`} alt={card.name} />
             </div>
           ))}

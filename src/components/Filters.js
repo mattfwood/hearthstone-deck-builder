@@ -24,7 +24,7 @@ const Filters = props => {
       <div>Mana Cost</div>
       <Radio.Group defaultValue={null} buttonStyle="solid">
         {manaCosts.map(cost => (
-          <Radio.Button value={cost} onClick={() => changeFilters('mana', cost)}>
+          <Radio.Button key={cost} value={cost} onClick={() => changeFilters('mana', cost)}>
             {cost}
           </Radio.Button>
         ))}
