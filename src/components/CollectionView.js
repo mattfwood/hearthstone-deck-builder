@@ -64,8 +64,14 @@ class CollectionView extends Component {
   changeFilters = (type, value) => {
     const { filters } = this.state;
     if (type === 'mana') {
-      console.log({ type, value });
       filters.mana = parseInt(value, 10);
+      this.setState({
+        filters,
+      });
+    }
+
+    if (type === 'query') {
+      filters.query = value;
       this.setState({
         filters,
       });
@@ -79,19 +85,41 @@ class CollectionView extends Component {
     });
   };
 
+  handleClose = () => {
+    this.setState({
+      overlayVisible: false,
+    });
+  };
+
   render() {
     const { page, filters, overlayVisible, activeCard } = this.state;
-    // console.log(activeCard);
 
     const filteredCards = cards.filter(card => {
+      let validCard = true;
       if (filters.mana !== null) {
-        if (filters.mana === 9) {
-          return card.cost >= filters.mana;
+        if (filters.mana === 9 && card.cost <= 9) {
+          validCard = false;
+        } else if (card.cost !== filters.mana) {
+          validCard = false;
         }
-        return card.cost === filters.mana;
       }
 
-      return card;
+      if (filters.query !== null && filters.query !== '') {
+        let { query } = filters;
+        query = query.toLowerCase();
+        let { name, text, rarity } = card;
+        name = name.toLowerCase();
+        text = text && text.toLowerCase();
+        rarity = rarity.toLowerCase();
+
+        const queryMatch = name.includes(query) || ((text && text.includes(query)) || rarity.includes(query));
+        // if query is not in card name or text, filter it out
+        if (!queryMatch) {
+          validCard = false;
+        }
+      }
+
+      return validCard;
     });
 
     const visibleCards = filteredCards.slice(page * 8, page * 8 + 8);
@@ -115,7 +143,7 @@ class CollectionView extends Component {
             </div>
           ))}
         </CardGrid>
-        <CardOverlay card={activeCard} visible={overlayVisible} />
+        <CardOverlay card={activeCard} close={this.handleClose} visible={overlayVisible} />
         <Button
           type="primary"
           shape="circle"
